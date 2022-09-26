@@ -13,7 +13,7 @@ export default function Notification({
   return (
     <button
       onClick={() => onClickNotification(notification.id)}
-      className={`rounded-lg p-4 w-full flex gap-x-3 ${
+      className={`rounded-lg p-4 w-full flex gap-x-3 relative ${
         notification.isNew ? "bg-neutral-200" : ""
       }`}
     >
@@ -25,7 +25,7 @@ export default function Notification({
         height={48}
         className="rounded-full h-12 w-12 object-cover"
       />
-      <div className="text-neutral-600 text-start relative">
+      <div className="text-neutral-600 text-start">
         <strong className="text-black">{notification.from.name}</strong>
         {" " + notification.content}
         {notification.reference && (
@@ -34,9 +34,6 @@ export default function Notification({
               {" " + notification.reference.title}
             </a>
           </Link>
-        )}
-        {notification.isNew && (
-          <span className="absolute rounded-full inline-block mx-2 h-3 w-3 bg-primary-red animate-pulse"></span>
         )}
         {notification.message && (
           <p className="bg-white border border-neutral-400 p-3 rounded my-3">
@@ -53,6 +50,9 @@ export default function Notification({
           />
         )}
       </div>
+      {notification.isNew && (
+        <span className="absolute left-4 top-4 rounded-full inline-block h-3 w-3 bg-primary-red animate-pulse"></span>
+      )}
     </button>
   );
 }
