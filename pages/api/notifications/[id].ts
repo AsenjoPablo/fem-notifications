@@ -30,11 +30,9 @@ export default function handler(
     // this avoids getting a date greater than current time
     const randomDate = new Date(
       `2022-${Math.floor(
-        Math.random() * new Date().getMonth() + 1
+        Math.random() * new Date().getMonth() + 2 // +2 because months start at 0 but minimum is 1
       )}-${Math.floor(Math.random() * (new Date().getDate() - 1) + 1)}`
     );
-
-    console.log(randomDate);
 
     switch (notificationType) {
       case 0:
@@ -99,6 +97,8 @@ export default function handler(
   }
 
   res.status(200).json({
-    data,
+    data: data.sort((a, b) => {
+      return a.dateCreated < b.dateCreated ? 1 : -1;
+    }),
   });
 }
