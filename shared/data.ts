@@ -52,4 +52,25 @@ export const Posts: Post[] = [
     image_url:
       "https://images.unsplash.com/photo-1664142121279-310b88f053f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
   },
+  {
+    id: uuid(),
+    title: "Why Fall is an amazing season",
+    link: "",
+    image_url:
+      "https://images.unsplash.com/photo-1664136535720-ce2cd0087987?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+  },
+  {
+    id: uuid(),
+    title: "Taking better pictures",
+    link: "",
+    image_url:
+      "https://images.unsplash.com/photo-1664142315016-89b004b66788?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=60",
+  },
+  {
+    id: uuid(),
+    title: "Fire is a powerful element in media",
+    link: "",
+    image_url:
+      "https://images.unsplash.com/photo-1664196533386-1f6b0a67fa7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80",
+  },
 ];
