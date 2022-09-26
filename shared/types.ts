@@ -3,6 +3,7 @@ export interface NotificationItem {
   from: User;
   to: string;
   content: string;
+  dateCreated: Date | string;
   isNew?: boolean;
   reference?: Post;
   message?: string;

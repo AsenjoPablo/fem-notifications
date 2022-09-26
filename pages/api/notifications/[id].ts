@@ -27,6 +27,15 @@ export default function handler(
 
     const randomPost: Post = Posts[Math.floor(Math.random() * Posts.length)];
 
+    // this avoids getting a date greater than current time
+    const randomDate = new Date(
+      `2022-${Math.floor(
+        Math.random() * new Date().getMonth() + 1
+      )}-${Math.floor(Math.random() * (new Date().getDate() - 1) + 1)}`
+    );
+
+    console.log(randomDate);
+
     switch (notificationType) {
       case 0:
         data.push({
@@ -35,6 +44,7 @@ export default function handler(
           to: "receiver",
           content: "followed you",
           isNew: true,
+          dateCreated: randomDate,
         });
         break;
       case 1:
@@ -44,6 +54,7 @@ export default function handler(
           to: "receiver",
           content: "reacted to your recent post",
           isNew: true,
+          dateCreated: randomDate,
           reference: {
             id: uuidv4(),
             title: randomPost.title,
@@ -59,6 +70,7 @@ export default function handler(
           to: "receiver",
           content: "liked your post",
           isNew: true,
+          dateCreated: randomDate,
           reference: {
             id: uuidv4(),
             title: randomPost.title,
@@ -75,6 +87,7 @@ export default function handler(
           to: "receiver",
           content: "sent you a message",
           isNew: true,
+          dateCreated: randomDate,
           message:
             message.length > 140 ? `${message.substring(0, 140)}...` : message, // truncates at 140 characters
         });
