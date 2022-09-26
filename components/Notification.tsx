@@ -11,7 +11,7 @@ export default function Notification({
   onClickNotification: (id: string) => void;
 }) {
   const getDateDifference = (date: Date) => {
-    const daysDiff = Math.round(
+    const daysDiff = Math.floor(
       (new Date().getTime() - date.getTime()) / (1000 * 3600 * 24)
     );
 
@@ -37,6 +37,10 @@ export default function Notification({
 
     if (daysDiff > 6) {
       return "One week ago";
+    }
+
+    if (daysDiff === 1) {
+      return "One day ago";
     }
 
     return `${daysDiff} days ago`;
