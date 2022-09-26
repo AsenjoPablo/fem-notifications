@@ -19,6 +19,23 @@ const Home = () => {
     ]);
   };
 
+  const setNotificationAsRead = (id: string) => {
+    const updatedNotifications = notificationsList.map((notification) => {
+      if (notification.id === id) {
+        return {
+          ...notification,
+          isNew: false,
+        };
+      }
+
+      return {
+        ...notification,
+      };
+    });
+
+    setNotificationsList(updatedNotifications);
+  };
+
   // loads notifications on initialization
   useEffect(() => {
     // function declaration for async useEffect
@@ -66,7 +83,11 @@ const Home = () => {
         <div className="flex flex-col w-full gap-y-4 overflow-auto">
           {/* Notifications */}
           {notificationsList.map((notification) => (
-            <Notification key={notification.id} notification={notification} />
+            <Notification
+              key={notification.id}
+              notification={notification}
+              onClickNotification={setNotificationAsRead}
+            />
           ))}
         </div>
       </div>

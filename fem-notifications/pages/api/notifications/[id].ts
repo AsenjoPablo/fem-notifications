@@ -1,21 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NotificationItem } from "../../../shared/types";
-import { Users } from "../../../shared/users";
+import { Messages, PostTitles, Users } from "../../../shared/data";
 import { NotificationsDataResponse } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
-const NotificationTypes: NotificationItem[] = [];
+const NotificationTypes: string[] = ["follow", "reaction", "like", "message"];
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<NotificationsDataResponse>
 ) {
-  console.log("Requesting notifications", req.query.id);
-
   const data = [];
+  const notificationsNumber = Math.floor(Math.random() * (50 - 15) + 15);
 
   // populate data
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < notificationsNumber; index++) {
     // user is randomly picked from external constant
     const user = Users[Math.floor(Math.random() * Users.length)];
 
@@ -25,18 +24,58 @@ export default function handler(
       Math.random() * NotificationTypes.length
     );
 
-    // notification is pushed
-    data.push({
-      id: "1",
-      from: user,
-      to: "receiver",
-      content: "reacted to your recent post",
-      isNew: true,
-      reference: {
-        text: "My article post",
-        link: "http://google.es",
-      },
-    });
+    switch (notificationType) {
+      case 0:
+        data.push({
+          id: uuidv4(),
+          from: user,
+          to: "receiver",
+          content: "followed you",
+          isNew: true,
+        });
+        break;
+      case 1:
+        data.push({
+          id: uuidv4(),
+          from: user,
+          to: "receiver",
+          content: "reacted to your recent post",
+          isNew: true,
+          reference: {
+            text: PostTitles[Math.floor(Math.random() * PostTitles.length)],
+            link: "http://google.es",
+          },
+        });
+        break;
+      case 2:
+        data.push({
+          id: uuidv4(),
+          from: user,
+          to: "receiver",
+          content: "liked your post",
+          isNew: true,
+          reference: {
+            text: PostTitles[Math.floor(Math.random() * PostTitles.length)],
+            link: "http://google.es",
+          },
+        });
+        break;
+      case 3:
+        const message = Messages[Math.floor(Math.random() * Messages.length)];
+        data.push({
+          id: uuidv4(),
+          from: user,
+          to: "receiver",
+          content: "sent you a message",
+          isNew: true,
+          message:
+            message.length > 140 ? `${message.substring(0, 140)}...` : message, // truncates at 140 characters
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   res.status(200).json({

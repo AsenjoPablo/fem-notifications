@@ -5,11 +5,14 @@ import { NotificationItem } from "../shared/types";
 
 export default function Notification({
   notification,
+  onClickNotification,
 }: {
   notification: NotificationItem;
+  onClickNotification: (id: string) => void;
 }) {
   return (
-    <div
+    <button
+      onClick={() => onClickNotification(notification.id)}
       className={`rounded-lg p-4 w-full flex gap-x-3 ${
         notification.isNew ? "bg-neutral-200" : ""
       }`}
@@ -20,13 +23,13 @@ export default function Notification({
         alt="a person's avatar picture"
         width={48}
         height={48}
-        className="rounded-full h-full aspect-square object-cover"
+        className="rounded-full h-12 w-12 object-cover"
       />
-      <p className="text-neutral-600">
+      <div className="text-neutral-600 text-start">
         <strong className="text-black">{notification.from.name}</strong>
         {" " + notification.content}
         {notification.reference && (
-          <Link href="/reference-link">
+          <Link href="/">
             <a className="text-primary-blue font-semibold">
               {" " + notification.reference.text}
             </a>
@@ -40,7 +43,7 @@ export default function Notification({
             {notification.message}
           </p>
         )}
-      </p>
-    </div>
+      </div>
+    </button>
   );
 }
