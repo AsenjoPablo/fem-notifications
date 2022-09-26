@@ -48,9 +48,9 @@ export default function Notification({
   return (
     <button
       onClick={() => onClickNotification(notification.id)}
-      className={`rounded-lg p-4 w-full flex gap-x-3 relative ${
-        notification.isNew ? "bg-neutral-200" : ""
-      }`}
+      className={`rounded-lg p-4 w-full flex gap-x-3 relative
+      hover:bg-neutral-50 duration-150
+      ${notification.isNew ? "bg-neutral-200" : ""}`}
     >
       {/* <div className=" bg-primary-red h-12 w-12 rounded-full aspect-square"></div> */}
       <Image
