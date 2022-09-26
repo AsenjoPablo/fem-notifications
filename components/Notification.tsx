@@ -10,6 +10,37 @@ export default function Notification({
   notification: NotificationItem;
   onClickNotification: (id: string) => void;
 }) {
+  const getDateDifference = (date: Date) => {
+    const daysDiff = Math.round(
+      (new Date().getTime() - date.getTime()) / (1000 * 3600 * 24)
+    );
+
+    if (daysDiff > 89) {
+      return "A long time ago";
+    }
+
+    if (daysDiff > 59) {
+      return "Two months ago";
+    }
+
+    if (daysDiff > 29) {
+      return "One month ago";
+    }
+
+    if (daysDiff > 20) {
+      return "Three weeks ago";
+    }
+
+    if (daysDiff > 13) {
+      return "Two weeks ago";
+    }
+
+    if (daysDiff > 6) {
+      return "One week ago";
+    }
+
+    return `${daysDiff} days ago`;
+  };
   return (
     <button
       onClick={() => onClickNotification(notification.id)}
@@ -34,6 +65,11 @@ export default function Notification({
               {" " + notification.reference.title}
             </a>
           </Link>
+        )}
+        {notification.dateCreated && (
+          <span className="block text-xs text-neutral-500 my-1">
+            {getDateDifference(new Date(notification.dateCreated))}
+          </span>
         )}
         {notification.message && (
           <p className="bg-white border border-neutral-400 p-3 rounded my-3">
