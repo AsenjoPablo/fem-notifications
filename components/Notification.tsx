@@ -5,10 +5,8 @@ import { NotificationItem } from "../shared/types";
 
 export default function Notification({
   notification,
-  onClickNotification,
 }: {
   notification: NotificationItem;
-  onClickNotification: (id: string) => void;
 }) {
   const getDateDifference = (date: Date) => {
     const daysDiff = Math.floor(
@@ -46,8 +44,7 @@ export default function Notification({
     return `${daysDiff} days ago`;
   };
   return (
-    <button
-      onClick={() => onClickNotification(notification.id)}
+    <div
       className={`rounded-lg p-4 w-full flex gap-x-3 relative
       hover:bg-neutral-50 duration-150
       ${notification.isNew ? "bg-neutral-200" : ""}`}
@@ -61,11 +58,13 @@ export default function Notification({
         className="rounded-full h-12 w-12 object-cover"
       />
       <div className="text-neutral-600 text-start">
-        <strong className="text-black">{notification.from.name}</strong>
+        <strong className="text-black hover:text-slate-500 duration-150 cursor-pointer">
+          {notification.from.name}
+        </strong>
         {" " + notification.content}
         {notification.reference && (
           <Link href="/">
-            <a className="text-primary-blue font-semibold">
+            <a className="text-primary-blue font-semibold hover:opacity-70 duration-150">
               {" " + notification.reference.title}
             </a>
           </Link>
@@ -93,6 +92,6 @@ export default function Notification({
       {notification.isNew && (
         <span className="absolute left-4 top-4 rounded-full inline-block h-3 w-3 bg-primary-red animate-pulse"></span>
       )}
-    </button>
+    </div>
   );
 }
