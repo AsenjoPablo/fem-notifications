@@ -39,7 +39,7 @@ const Home = () => {
       </Head>
 
       {/* main container */}
-      <div className="bg-white h-screen p-6 w-full max-w-xl rounded flex flex-col items-center text-slate-900">
+      <main className="bg-white h-screen p-6 w-full max-w-xl rounded flex flex-col items-center text-slate-900">
         {/* header */}
         <div className="flex justify-between w-full my-3">
           <div className="flex items-center gap-2">
@@ -70,7 +70,7 @@ const Home = () => {
             <Notification key={notification.id} notification={notification} />
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 };
